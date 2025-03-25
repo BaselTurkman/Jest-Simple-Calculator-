@@ -51,4 +51,18 @@ describe('Calculator', () => {
   it('should throw an error for invalid input types', () => {
     expect(() => calc('2', '+', 3)).toThrow('Invalid input type');
   });
+
+  //Test case: Handle unknown numbers
+  it('should handle an unknown number of numbers', () => {
+    expect(calc(1, '+', 2, '+', 3, '+', 4)).toBe(10);
+  });
+
+  // Test case: Ignore numbers greater than 1000
+  it('should ignore numbers greater than 1000', () => {
+    expect(calc(2, '+', 1001)).toBe(2);
+    expect(calc(1001, '*', 5)).toBe(0);
+    expect(calc(2000, '+', 1000)).toBe(0);
+    expect(calc(10, '+', 1000, '*', 5)).toBe(10);
+  });
+
 });
