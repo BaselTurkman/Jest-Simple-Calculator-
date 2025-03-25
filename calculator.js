@@ -5,6 +5,10 @@ function calc(...operations) {
 
     let tokens = [...operations];
 
+
+    tokens = tokens.map(token => (typeof token === 'number' && token >= 1000 ? 0 : token));
+
+
     if (tokens.some((token, index) => index % 2 === 0 && typeof token !== 'number')) {
         throw new Error("Invalid input type");
     }
@@ -14,7 +18,7 @@ function calc(...operations) {
         if (tokens[i] === '*' || tokens[i] === '/') {
             let result = performOperation(tokens[i - 1], tokens[i], tokens[i + 1]);
             tokens.splice(i - 1, 3, result);
-            i -= 2; 
+            i -= 2;
         }
     }
 
@@ -23,7 +27,7 @@ function calc(...operations) {
     for (let i = 1; i < tokens.length; i += 2) {
         result = performOperation(result, tokens[i], tokens[i + 1]);
     }
-    
+
     return result;
 }
 
