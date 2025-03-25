@@ -1,5 +1,5 @@
 // calculator.test.js
-const calc = require('./calculator');
+const calc = require('./calculator.js');
 
 describe('Calculator', () => {
   // Test case: Addition
