@@ -5,10 +5,10 @@ function calc(...operations) {
 
     let tokens = [...operations];
 
-
+    // Ignore numbers greater than 1000
     tokens = tokens.map(token => (typeof token === 'number' && token >= 1000 ? 0 : token));
 
-
+    // Check for invalid input types
     if (tokens.some((token, index) => index % 2 === 0 && typeof token !== 'number')) {
         throw new Error("Invalid input type");
     }
