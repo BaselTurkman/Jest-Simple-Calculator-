@@ -1,5 +1,5 @@
 // calculator.test.js
-const calc = require('./calculator');
+const calc = require('./calculator.js');
 
 describe('Calculator', () => {
   // Test case: Addition
@@ -51,4 +51,30 @@ describe('Calculator', () => {
   it('should throw an error for invalid input types', () => {
     expect(() => calc('2', '+', 3)).toThrow('Invalid input type');
   });
+
+  //Test case: Handle unknown numbers
+  it('should handle an unknown number of numbers', () => {
+    expect(calc(1, '+', 2, '+', 3, '+', 4)).toBe(10);
+  });
+
+  // Test case: Ignore numbers greater than 1000
+  it('should ignore numbers greater than 1000', () => {
+    expect(calc(2, '+', 1001)).toBe(2);
+    expect(calc(1001, '*', 5)).toBe(0);
+    expect(calc(2000, '+', 1000)).toBe(0);
+    expect(calc(10, '+', 1000, '*', 5)).toBe(10);
+  });
+  
+  // Test case: Invalid input arguments
+  it('should throw an error if there are less than 3 arguments', () => {
+    expect(() => calc(2, '+')).toThrow('Invalid number of arguments');
+    expect(() => calc(2)).toThrow('Invalid number of arguments');
+  });
+  
+  //test case: Invalid number of arguments
+  it('should throw an error if the number of arguments is even', () => {
+    expect(() => calc(2, '+', 3, '*')).toThrow('Invalid number of arguments');
+    expect(() => calc(2, '-', 3, '+', 4, '*')).toThrow('Invalid number of arguments');
+  });
+
 });
